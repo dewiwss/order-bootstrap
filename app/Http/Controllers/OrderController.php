@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\Kasir;
 
 class OrderController extends Controller
 {
@@ -12,14 +13,20 @@ class OrderController extends Controller
     }
     public function data_order(Request $request){
         if($request->has('cari')){
-            $order = Order::where('nama_customer','LIKE','%'.$request->cari.'%')->orderby('kode_transaksi','desc');
+            //pencarian seharusnya berdasarkan nama kasir bukan id kasir, harus diperbaiki
+            $order = Order::where('kasir_id','LIKE','%'.$request->cari.'%')->orderby('kode_transaksi','desc');
         }else{
-            $order = Order::orderby('kode_transaksi','desc');
+            $order = Order::orderby('kode_transaksi','desc');  
         }
         $order = $order->paginate(5);
         // dd($order); untuk melihat isi seperi var dump
         $order->appends($request->only('cari'));
         return view('order.data_order',compact('order'));
+    }
+
+    public function ShowFormCreate(){
+        $kasir = Kasir::all();
+        return view('order.create',compact('kasir'));
     }
 
     public function creating(Request $request){
@@ -35,7 +42,9 @@ class OrderController extends Controller
 
     public function update($id){
         $order = Order::find($id);
-        return view('order.update',compact('order'));
+        $kasir = Kasir::all();
+        // $kasir = Order::find($id);
+        return view('order.update',compact('order','kasir'));
     }
 
     public function updating(Request $request, $id){

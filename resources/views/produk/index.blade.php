@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
-@section('title','Data Order') 
+@section('title','Data Produk') 
 
-@section('content_header','Data Order')
+@section('content_header','Data Produk')
 
 @section('content')
 
@@ -46,23 +46,21 @@
         <table class="table table-bordered">
         <thead>                  
             <tr>
-            <th>Kode Transaksi</th>
-            <th>Nama Kasir</th>
-            <th>Produk</th>
-            <th>Total</th>
+            <th>ID</th>
+            <th>Nama Produk</th>
+            <th>Harga</th>
             <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($order as $ord)
+            @foreach ($produk as $prd)
             <tr>
-                <td>{{$ord->kode_transaksi}}</td>
-                <td><a href="/kasir/{{$ord->kasir_id}}">{{$ord->kasir->nama}}</a></td>
-                <td>{{$ord->produk}}</td>
-                <td>{{$ord->total}}</td>
+                <td>{{$prd->id}}</td>
+                <td><a href="/produk/{{$prd->id}}/dataorder">{{$prd->nama}}</a></td>
+                <td>{{$prd->harga}}</td>
                 <td>
-                    <a href="/order/{{$ord->id}}/update" class="badge bg-warning "><i class="fas fa-edit"></i>Update</a>
-                    <a class="badge bg-danger" href="/order/{{$ord->id}}/delete" onclick="return confirm('Yakin menghapus Transaksi {{$ord->kode_transaksi}} atas nama {{$ord->kasir->nama}}?')"><i class="far fa-trash-alt"></i> Delete</a>
+                    <a href="/produk/{{$prd->id}}/update" class="badge bg-warning "><i class="fas fa-edit"></i>Update</a>
+                    <a class="badge bg-danger" href="/produk/{{$prd->id}}/delete" onclick="return confirm('Yakin menghapus Produk {{$prd->nama}}?')"><i class="far fa-trash-alt"></i> Delete</a>
 
             
                 </td>
@@ -73,7 +71,7 @@
     </div>
     <!-- /.card-body -->
     <div class="card-footer clearfix">
-            {{$order->links()}}
+            {{-- {{$order->links()}} --}}
     </div>
     </div>
 @endsection

@@ -18,9 +18,14 @@
             <label for="kode_transaksi">Kode Transaksi</label>
             <input type="text" name="kode_transaksi" id="" placeholder="Masukkan Kode Transaksi.." class="form-control">
         </div>
+
         <div class="form-group">
-            <label for="nama_customer">Nama Customer</label>
-            <input type="text" name="nama_customer" id="" placeholder="Nama Customer.." class="form-control">
+            <label for="kasir_id">Nama Kasir</label>
+            <select class="form-control select2bs4" name="kasir_id" style="width: 100%;">
+                @foreach ( $kasir as $ksr )
+                    <option value="{{$ksr->id}}">{{$ksr->nama}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
             <label for="produk">Produk</label>

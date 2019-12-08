@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
-@section('title','Data Order') 
+@section('title','Data Kasir') 
 
-@section('content_header','Data Order')
+@section('content_header','Data Kasir')
 
 @section('content')
 
@@ -27,11 +27,11 @@
 <div class="card">
     <div class="card-header">
         <div class="card-title">
-            <a href="{{url('/order/create')}}" class="btn btn-block bg-gradient-primary btn-sm nav-icon fas fa-edit"> Tambah Data</a>
+            <a href="{{url('/kasir/create')}}" class="btn btn-block bg-gradient-primary btn-sm nav-icon fas fa-edit"> Tambah Data</a>
         </div>
 
             <div class="card-tools">
-                <form action="/order" method="get">
+                <form action="/kasir" method="get">
                 <div class="input-group input-group-sm" style="width: 150px;">
                 <input type="text" class="form-control float-right" placeholder="Search" name="cari">
                 <div class="input-group-append">
@@ -43,29 +43,21 @@
             </div>
     <!-- /.card-header -->
     <div class="card-body">
+        <h3>Nama Kasir : {{$kasir->nama}}</h3>
         <table class="table table-bordered">
         <thead>                  
             <tr>
             <th>Kode Transaksi</th>
-            <th>Nama Kasir</th>
             <th>Produk</th>
             <th>Total</th>
-            <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($order as $ord)
+            @foreach ($kasir->order as $ord)
             <tr>
                 <td>{{$ord->kode_transaksi}}</td>
-                <td><a href="/kasir/{{$ord->kasir_id}}">{{$ord->kasir->nama}}</a></td>
                 <td>{{$ord->produk}}</td>
                 <td>{{$ord->total}}</td>
-                <td>
-                    <a href="/order/{{$ord->id}}/update" class="badge bg-warning "><i class="fas fa-edit"></i>Update</a>
-                    <a class="badge bg-danger" href="/order/{{$ord->id}}/delete" onclick="return confirm('Yakin menghapus Transaksi {{$ord->kode_transaksi}} atas nama {{$ord->kasir->nama}}?')"><i class="far fa-trash-alt"></i> Delete</a>
-
-            
-                </td>
             </tr>
             @endforeach
         </tbody>
@@ -73,7 +65,7 @@
     </div>
     <!-- /.card-body -->
     <div class="card-footer clearfix">
-            {{$order->links()}}
+            {{-- {{$kasir->links()}} --}}
     </div>
     </div>
 @endsection

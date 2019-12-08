@@ -18,10 +18,17 @@
             <label for="kode_transaksi">Kode Transaksi</label>
             <input type="text" name="kode_transaksi" value="{{$order->kode_transaksi}}" id="" placeholder="Masukkan Kode Transaksi.." class="form-control">
         </div>
+
+        {{-- harus di fix value di bagian select belum benar, data yang tampil selalu id ke-1--}}
         <div class="form-group">
-            <label for="nama_customer">Nama Customer</label>
-            <input type="text" name="nama_customer" value="{{$order->nama_customer}}" id="" placeholder="Nama Customer.." class="form-control">
+            <label for="kasir_id">Nama Kasir</label>
+            <select class="form-control select2bs4" name="kasir_id" value="{{$order->kasir->nama}}" style="width: 100%;">
+                @foreach ( $kasir as $ksr )
+                    <option value="{{$ksr->id}}">{{$ksr->nama}}</option>
+                @endforeach
+            </select>
         </div>
+
         <div class="form-group">
             <label for="produk">Produk</label>
             <input type="text" name="produk" value="{{$order->produk}}" id="" placeholder="Produk.." class="form-control">

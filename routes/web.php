@@ -18,12 +18,14 @@ Route::get('/', function () {
 Route::group(['middleware'=>'auth'],function(){
     //belajar buat app CRUD dengan templating blade dan bootstrap
     Route::get('/dashboard','OrderController@index');
+
     // route menampilkan data order
     Route::get('/order','OrderController@data_order');
+    
     //route menampilkan halaman form tambah dadta
-    Route::get('/order/create',function(){
-        return view('order.create');
-    });
+    // Route::get('/order/create',function(){
+    //     return view('order.create');
+    // });
     //route mengirim data di form atau proses penambahan data melalui form
     Route::post('/order/creating','OrderController@creating');
     //route delete data order
@@ -32,6 +34,22 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/order/{id}/update','OrderController@update');
     //route proses update data order
     Route::post('/order/{id}/updating','OrderController@updating');
+    
+    //belajar one to many
+    //route menampilkan data kasir
+    Route::get('/kasir/{id}','KasirController@data_kasir');
+    
+    //route menampilkkan form tambah data nama kasir pada form order
+    Route::get('/order/create','OrderController@ShowFormCreate');
+
+    //belajar many to mmany
+    //menmapilkan data produk
+    Route::get('/produk','ProdukController@data_produk');
+    //menampilkan dataorder dengan nama produk dapat diklik
+    Route::get('/produk/{id}/dataorder','ProdukController@ShowOrder');
+    //tambah data order melalui data produk
+    Route::post('/produk/{id}/dataorder','ProdukController@tambahOrder');
+    
     Route::get('/home', 'HomeController@index')->name('home');
 });
 
